@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import Course from './Course';
+import CourseSelector from './CourseSelector';
 import TermSelector from './TermSelector';
+import { getCourseTerm } from '../utils/course.js';
 
 const CourseList = ({ courses }) => {
-    const termMap = { F: 'Fall', W: 'Winter', S: 'Spring' };
-    const terms = Object.values(termMap);
-
-    const getCourseTerm = course => (
-        termMap[course.id.charAt(0)]
-    );
-
     const [selectedTerm, setSelectedTerm] = useState('Winter');
     const termCourses = courses.filter(course => selectedTerm === getCourseTerm(course));
 
@@ -19,7 +13,7 @@ const CourseList = ({ courses }) => {
             <TermSelector selectedTerm={selectedTerm} setSelectedTerm={setSelectedTerm} />
             <ScrollView>
                 <View style={styles.courseList}>
-                {termCourses.map(course => <Course key={course.id} course={course} />)}
+                    <CourseSelector courses={termCourses} />
                 </View>
             </ScrollView>
         </React.Fragment >
