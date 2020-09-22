@@ -4,7 +4,7 @@ import CourseSelector from './CourseSelector';
 import TermSelector from './TermSelector';
 import { getCourseTerm } from '../utils/course.js';
 
-const CourseList = ({ courses }) => {
+const CourseList = ({ courses, view }) => {
     const [selectedTerm, setSelectedTerm] = useState('Winter');
     const termCourses = courses.filter(course => selectedTerm === getCourseTerm(course));
 
@@ -13,7 +13,7 @@ const CourseList = ({ courses }) => {
             <TermSelector selectedTerm={selectedTerm} setSelectedTerm={setSelectedTerm} />
             <ScrollView>
                 <View style={styles.courseList}>
-                    <CourseSelector courses={termCourses} />
+                    <CourseSelector courses={termCourses} view={view} />
                 </View>
             </ScrollView>
         </React.Fragment >
